@@ -33,6 +33,19 @@ public class Lab1P2_GabirelOsorto {
                     Date FechadeNacimiento = sd.parse(fechanacimiento);
                     System.out.print("Ingrese su correo electronico:");
                     String correo = lt.nextLine();
+                    boolean valido = false;
+                    while (valido == false) {
+                        String[] splitear1 = correo.split("@");
+                        String dominioReal = splitear1[1];
+                        if ((dominioReal.equalsIgnoreCase("gmail.com")) || (dominioReal.equalsIgnoreCase("Outlook.com")) || (dominioReal.equalsIgnoreCase("Yahoo.com")) || (dominioReal.equalsIgnoreCase("iCloud.com")) || (dominioReal.equalsIgnoreCase("ProtonMail.com")) || (dominioReal.equalsIgnoreCase("FastMail.com"))) {
+                            valido = true;
+                        } else {
+                            System.out.println("Dominios validos== Gmail, Outlook, Yahoo, iCloud, ProtonMail y FastMail.");
+                            System.out.print("Dominio no existente, ingrese un correo con un dominio valido:");
+                            correo = lt.nextLine();
+                        }
+                    }
+
                     System.out.print("Ingrese su contraseña:");
                     String contra = lt.nextLine();
                     Usuario NuevoUsuario = new Usuario(nombre, apellido, FechadeNacimiento, correo, contra);
