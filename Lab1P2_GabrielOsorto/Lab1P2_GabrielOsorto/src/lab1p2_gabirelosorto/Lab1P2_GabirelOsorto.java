@@ -47,14 +47,14 @@ public class Lab1P2_GabirelOsorto {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
 
-    }//Metodo Regex
+    }//Metodo Regex correo
 
     public static boolean ContraValid(String contraseña) {
         String regex = "^[a-zA-Z0-9._%&$+-?<>!]{8,}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(contraseña);
         return matcher.matches();
-    }
+    }//Metodo Regex contra
 
     public static void Case1() throws ParseException {
         System.out.print("Ingrese su nombre:");
@@ -86,11 +86,13 @@ public class Lab1P2_GabirelOsorto {
             System.out.print("Ingrese su contraseña:");
             String contra = lt.nextLine();
             if (ContraValid(contra)) {
-
+                System.out.println("Contraseña Validada Correctamente!!");
+            } else {
+                System.out.println("Contraseña Invalida");
             }
+
             Usuario NuevoUsuario = new Usuario(nombre, apellido, FechadeNacimiento, correo, contra);
             Usuarios.add(NuevoUsuario);
-
             System.out.println("correo agregado con exito!!");
         } else {
             System.out.println("correo invalido");
@@ -113,9 +115,28 @@ public class Lab1P2_GabirelOsorto {
 
     public static void PrintFecha(Date fecha) {
         System.out.println((fecha.getYear() + 1900) + "/" + (fecha.getMonth() + 1) + "/" + fecha.getDate() + "]");
-    }
+    }//Metodo imprimir fecha
 
     public static void Case3() {//Imprimir lista segun el dominio
+        System.out.println("Listar segun el Dominio");
+        System.out.print("Ingrese el dominio que desea buscar(recuerde ingresarlo con el .com):");
+        String dominio2 = lt.nextLine();
+        if ((dominio2.equalsIgnoreCase("gmail.com")) || (dominio2.equalsIgnoreCase("Outlook.com")) || (dominio2.equalsIgnoreCase("Yahoo.com")) || (dominio2.equalsIgnoreCase("iCloud.com")) || (dominio2.equalsIgnoreCase("ProtonMail.com")) || (dominio2.equalsIgnoreCase("FastMail.com"))) {
+            System.out.println("Usuarios con dominio " + dominio2);
+            boolean encontrado = false;
+            for (Usuario usuario : Usuarios) {
+                if (usuario.getCorreo().toLowerCase().endsWith("@" + dominio2.toLowerCase())) {
+                    System.out.println("Usuario: " + usuario.getNombre() + " " + usuario.getApellido());
+                    PrintFecha(usuario.getFechadeNacimiento());
+                    encontrado = true;
+                }
+            }
 
-    }//Imprimir segun el Dominio
+            if (encontrado==false) {
+                System.out.println("No hay usuarios con el dominio especificado.");
+            }
+        } else {
+            System.out.println("El dominio no es válido");
+        }
+    }
 }
