@@ -109,6 +109,7 @@ public class Lab1P2_GabirelOsorto {
                 Usuario users = Usuarios.get(i);
                 System.out.print(users);
                 PrintFecha(users.getFechadeNacimiento());
+                System.out.println("");
             }
         }
         System.out.println("");
@@ -130,6 +131,7 @@ public class Lab1P2_GabirelOsorto {
                     System.out.println("Usuario: " + usuario.getNombre() + " " + usuario.getApellido());
                     System.out.println("correo: " + usuario.getCorreo() + " Contraseña:" + usuario.getContra());
                     PrintEdad(usuario.getFechadeNacimiento());
+                    System.out.println("");
                     encontrado = true;
                 }
             }
@@ -146,9 +148,20 @@ public class Lab1P2_GabirelOsorto {
         LocalDate fechaNac = LocalDate.of(fechaNacimiento.getYear() + 1900, fechaNacimiento.getMonth() + 1, fechaNacimiento.getDate());
         LocalDate ahora = LocalDate.now();
 
-        int years = ahora.getYear() - fechaNac.getYear();
-        int months = ahora.getMonthValue() - fechaNac.getMonthValue();
-        int days = ahora.getDayOfMonth() - fechaNac.getDayOfMonth();
+        int años = ahora.getYear() - fechaNac.getYear();
+        int meses = ahora.getMonthValue() - fechaNac.getMonthValue();
+        int dias = ahora.getDayOfMonth() - fechaNac.getDayOfMonth();
 
+        if (dias < 0) {
+            meses--;
+            dias += fechaNac.lengthOfMonth();
+        }
+
+        if (meses < 0) {
+            años--;
+            meses += 12;
+        }
+
+        System.out.println("Edad: " + años + " años con " + meses + " meses y " + dias + " días");
     }//Imprimir edad
 }
