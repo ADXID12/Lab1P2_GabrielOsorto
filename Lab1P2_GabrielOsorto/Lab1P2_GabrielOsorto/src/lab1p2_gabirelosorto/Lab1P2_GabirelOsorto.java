@@ -2,6 +2,7 @@ package lab1p2_gabirelosorto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -127,16 +128,27 @@ public class Lab1P2_GabirelOsorto {
             for (Usuario usuario : Usuarios) {
                 if (usuario.getCorreo().toLowerCase().endsWith("@" + dominio2.toLowerCase())) {
                     System.out.println("Usuario: " + usuario.getNombre() + " " + usuario.getApellido());
-                    PrintFecha(usuario.getFechadeNacimiento());
+                    System.out.println("correo: " + usuario.getCorreo() + " Contraseña:" + usuario.getContra());
+                    PrintEdad(usuario.getFechadeNacimiento());
                     encontrado = true;
                 }
             }
 
-            if (encontrado==false) {
+            if (encontrado == false) {
                 System.out.println("No hay usuarios con el dominio especificado.");
             }
         } else {
             System.out.println("El dominio no es válido");
         }
-    }
+    }//Imprimir lista segun dominio
+
+    public static void PrintEdad(Date fechaNacimiento) {
+        LocalDate fechaNac = LocalDate.of(fechaNacimiento.getYear() + 1900, fechaNacimiento.getMonth() + 1, fechaNacimiento.getDate());
+        LocalDate ahora = LocalDate.now();
+
+        int years = ahora.getYear() - fechaNac.getYear();
+        int months = ahora.getMonthValue() - fechaNac.getMonthValue();
+        int days = ahora.getDayOfMonth() - fechaNac.getDayOfMonth();
+
+    }//Imprimir edad
 }
