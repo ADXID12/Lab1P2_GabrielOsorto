@@ -68,7 +68,12 @@ public class Lab1P2_GabirelOsorto {
         Date FechadeNacimiento = sd.parse(fechanacimiento);
         System.out.print("Ingrese su correo electronico:");
         String correo = lt.nextLine();
-
+        for (Usuario usuario : Usuarios) {
+            while (usuario.getCorreo().equalsIgnoreCase(correo)) {
+                System.out.println("Correo electrónico ya existente. Ingrese uno nuevo:");
+                correo = lt.nextLine();
+            }
+        }
         if (CorreoValid(correo)) {
             boolean valido1 = false;
             while (valido1 == false) {
